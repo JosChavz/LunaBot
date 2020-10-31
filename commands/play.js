@@ -1,6 +1,4 @@
-const Client = require('../structures/Client');
 const { Message } = require('discord.js');
-const songQueue = require("../structures/Queue");
 
 module.exports = {
     name: 'play',
@@ -17,31 +15,41 @@ module.exports = {
         let data = await node.rest.resolve(args.join(" "), 'youtube'); // Returns an array of possible queries
         if (!data) return;
 
-        const player = await node.joinVoiceChannel({
-            guildID: message.guild.id,
-            voiceChannelID: message.member.voice.channelID
-        }); 
-        player.on('error', (error) => {
-            console.error(error);
-            player.disconnect();
-        });
-        // Song that has finished will pop from the current queue
-        player.on('end', (event) => {
-            songQueue.pop();
-        });
-        for (const event of ['closed', 'nodeDisconnect']) player.on(event, () => player.disconnect());
+        // Initializes the music player
+        if (!client.musicplayer) {
+            client.musicplayer = await node.joinVoiceChannel({
+                guildID: message.guild.id,
+                voiceChannelID: message.member.voice.channelID
+            }); 
+            client.musicplayer.on('error', (error) => {
+                console.error(error);
+                player.disconnect();
+            });
+            // EVENT: Song that has finished will pop from the current queue
+            client.musicplayer.on('end', (event) => {
+                console.log('Song has ended! Finished song: ' + client.nowPlaying.info.title);
+                client.nowPlaying = client.songQueue.shift();
+                if(!client.nowPlaying) return message.channel.send("That's it for today folks!");
+
+                // Assuming there is a next song in the queue
+                console.log('Next song is: ' + client.nowPlaying.info.title);
+                client.musicplayer.playTrack(client.nowPlaying);
+                message.channel.send("Now Playing: " + client.nowPlaying.info.title);
+            });
+        }
+        //for (const event of ['closed', 'nodeDisconnect']) player.on(event, () => player.disconnect());
         data = data.tracks.shift();
         
-        songQueue.push(data);
+        client.songQueue.push(data);
 
-        // I need to create a map that stores in data
-        await player.playTrack(data); 
-        await message.channel.send("Now Playing: " + data.info.title);
-
-        return player;
-
-        //const res = await client.music.searchAndPlay(client.music.shoukaku.getNode(), args.join(" "), 'youtube', message);
-
-        //message.channel.send(res.isPlaylist ? `Added to the playlist ${res.playlistName} to the queue, which has ${res.tracks.length} songs` : `Loaded ${res.songInfo.title} by ${res.songInfo.author}`);
+        // In case musicplayer is not playing anything at the moment
+        if(client.musicplayer.track == null || client.musicplayer.track == "") {
+            client.nowPlaying = client.songQueue.pop();
+            if(!client.nowPlaying) return message.channel.send('There was an error, H.');
+            console.log(client.nowPlaying.info.title);
+            client.musicplayer.playTrack(client.nowPlaying); 
+            message.channel.send("Now Playing: " + client.nowPlaying.info.title);
+        } 
+        else await message.channel.send("Added to the queue: " + data.info.title);
     }
 }
