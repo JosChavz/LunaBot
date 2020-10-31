@@ -1,4 +1,3 @@
-const Client = require('../structures/Client');
 const { Message } = require('discord.js');
 
 module.exports = {
@@ -8,11 +7,13 @@ module.exports = {
      * @param {Message} message
      * @param {String[]} args
      */
-    run: async(musicplayer, message, args) => {
+    run: async(client, message, args) => {
         if(!message.member.voice.channel) return message.channel.send('Are you really not in a VC? lmao tf?');
-        if(!musicplayer.getQueue(message)) return message.channel.send('Bro... nothing is even playing lmao');
+        if(!client.nowPlaying) return message.channel.send('Bro... nothing is even playing lmao');
 
-        await musicplayer.stop(message);
+        client.songQueue = [];
+
+        await client.musicplayer.stopTrack();
         message.channel.send(`Stopped.`);
     }
 }

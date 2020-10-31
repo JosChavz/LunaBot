@@ -1,1 +1,4 @@
-module.exports = songQueue = [];
+module.exports = {
+    nowPlaying: null,
+    songQueue: []
+};
