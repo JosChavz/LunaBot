@@ -2,6 +2,9 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: 'play',
+    timeOut: () => {
+        console.log('Is in timeout...');
+    },
     /**
      * @param {Client} client
      * @param {Message} message
@@ -21,23 +24,39 @@ module.exports = {
                 guildID: message.guild.id,
                 voiceChannelID: message.member.voice.channelID
             }); 
+            // EVENT: When an error is thrown
             client.musicplayer.on('error', (error) => {
                 console.error(error);
-                player.disconnect();
+                client.musicplayer.disconnect();
             });
             // EVENT: Song that has finished will pop from the current queue
             client.musicplayer.on('end', (event) => {
                 console.log('Song has ended! Finished song: ' + client.nowPlaying.info.title);
                 client.nowPlaying = client.songQueue.shift();
-                if(!client.nowPlaying) return message.channel.send("That's it for today folks!");
+
+                if(!client.nowPlaying) {
+                    client.clearMusicCache();
+                    return message.channel.send("👋 Adios!");
+                }
 
                 // Assuming there is a next song in the queue
                 console.log('Next song is: ' + client.nowPlaying.info.title);
                 client.musicplayer.playTrack(client.nowPlaying);
-                message.channel.send("Now Playing: " + client.nowPlaying.info.title);
+                message.channel.send("🎵 Now Playing: " + client.nowPlaying.info.title);
             });
+            // EVENT: When a bot leaves the voice chat, all instances regarding the music will become null
+            client.musicplayer.on('nodeDisconnect', (event) => {
+                console.log('is in here when disconnected');
+                client.musicplayer = null;
+                client.nowPlaying = null;
+                client.songQueue = [];
+            });
+            client.musicplayer.on('closed', (event) => {
+                message.channel.send('😞 I was kicked out!');
+                client.clearMusicCache();
+            })
         }
-        //for (const event of ['closed', 'nodeDisconnect']) player.on(event, () => player.disconnect());
+        //for (const event of ['closed', 'nodeDisconnect']) player.on(event, () => client.musicplayer.disconnect());
         data = data.tracks.shift();
         
         client.songQueue.push(data);
@@ -48,8 +67,8 @@ module.exports = {
             if(!client.nowPlaying) return message.channel.send('There was an error, H.');
             console.log(client.nowPlaying.info.title);
             client.musicplayer.playTrack(client.nowPlaying); 
-            message.channel.send("Now Playing: " + client.nowPlaying.info.title);
+            message.channel.send("**🎵 Now Playing: **`" + client.nowPlaying.info.title + "`!");
         } 
-        else await message.channel.send("Added to the queue: " + data.info.title);
+        else await message.channel.send("📝 Added to the queue: " + data.info.title);
     }
 }
