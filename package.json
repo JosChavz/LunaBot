@@ -18,7 +18,12 @@
   "homepage": "https://github.com/JosChavz/LunaBot#readme",
   "dependencies": {
     "discord.js": "^12.4.0",
-    "shoukaku": "^1.5.2"
+    "dotenv": "^8.2.0",
+    "mariadb": "^2.5.1",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.3.5",
+    "shoukaku": "^1.5.2",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
