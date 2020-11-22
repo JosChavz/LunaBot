@@ -1,6 +1,5 @@
-const Client = require('../structures/Client');
 const { Message } = require('discord.js');
-const ms = require('ms');
+
 module.exports = {
     name: `ping`,
     /**

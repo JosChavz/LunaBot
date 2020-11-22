@@ -2,13 +2,15 @@ const { clear } = require('console');
 const { Collection, Client, MessageEmbed, Message } = require('discord.js');
 const { Shoukaku, ShoukakuPlayer } = require('shoukaku');
 const { APPLICATION_CONFIG } = require('../bot_token'); 
- 
+const Database = require('./Database');
+
 const LavalinkServer = [{ 
     name: APPLICATION_CONFIG.name, 
     host: APPLICATION_CONFIG.host, 
     port: APPLICATION_CONFIG.port, 
     auth: APPLICATION_CONFIG.auth 
 }];
+
 const ShoukakuOptions = { 
     moveOnDisconnect: false, 
     resumable: false, 
@@ -16,9 +18,8 @@ const ShoukakuOptions = {
     reconnectTries: 2, 
     restTimeout: 5000 
 };
- 
+
 class MusicClient extends Client {
-    musicplayer;
 
     constructor() {
         super();
@@ -61,7 +62,7 @@ class MusicClient extends Client {
         this.on('ready', ()=> {
             console.log(`I'm now online!`);
         });
-        this.prefix = '~';
+        this.prefix = '&';
         this.on('message', async(message) => {
             if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
 
@@ -83,5 +84,28 @@ class MusicClient extends Client {
                 format: 'png'
             }) );
     }
+
+    /**
+     * Will clear anything regarding the music feature, including the musicplayer
+     */
+    clearMusicCache() {
+        this.musicplayer.disconnect();
+        this.musicplayer = null;
+        this.nowPlaying = null;
+        this.songQueue = [];
+    }
+
+    async runQuery(query) {
+        const db = new Database();
+        let results = "";
+        //db.query(`INSERT INTO aval_poke (name, id, hp, attack, defense) VALUES ('Bulbasaur', '1', '45', '49', 49)`);
+        await db.query(query)
+            .then(success => {
+                results = success;
+            })
+            .catch(err => console.log(err));
+        db.close();
+        return results;
+    };
 };
 module.exports = MusicClient;
