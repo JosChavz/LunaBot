@@ -18,7 +18,6 @@ const ShoukakuOptions = {
 };
  
 class MusicClient extends Client {
-    musicplayer;
 
     constructor() {
         super();
@@ -27,6 +26,7 @@ class MusicClient extends Client {
         this.path = require('path');
         this.fs = require('fs'); // File System
         this.shoukaku = new Shoukaku(this, LavalinkServer, ShoukakuOptions);
+	this.shoukaku.on('error', console.error);
         this.musicplayer = null;
         this.nowPlaying = null;
         this.songQueue = [];
