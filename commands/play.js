@@ -15,7 +15,11 @@ module.exports = {
         else if(!message.member.voice.channel) return message.channel.send('Are you really not in a VC? lmao tf?');
 
         const node = client.shoukaku.getNode(); // Gets the Shoukaku Socket
-        let data = await node.rest.resolve(args.join(" "), 'youtube'); // Returns an array of possible queries
+        var data = null;
+
+        // If it is a URL, it will search it; Otherwise, search the keywords into Youtube
+        if(args.join(" ").includes("http")) data = await node.rest.resolve(args.join(" ")); 
+        else data = await node.rest.resolve(args.join(" "), "youtube");
         if (!data) return;
 
         // Initializes the music player
