@@ -63,7 +63,7 @@ class MusicClient extends Client {
         this.on('ready', ()=> {
             console.log(`I'm now online!`);
         });
-        this.prefix = '&';
+        this.prefix = '~';
         this.on('message', async(message) => {
             if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
 
