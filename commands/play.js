@@ -28,6 +28,7 @@ module.exports = {
                 guildID: message.guild.id,
                 voiceChannelID: message.member.voice.channelID
             }); 
+            client.musicplayer.setVolume(50);
             // EVENT: When an error is thrown
             client.musicplayer.on('error', (error) => {
                 console.error(error);
@@ -46,7 +47,7 @@ module.exports = {
                 // Assuming there is a next song in the queue
                 console.log('Next song is: ' + client.nowPlaying.info.title);
                 client.musicplayer.playTrack(client.nowPlaying);
-                message.channel.send("🎵 Now Playing: " + client.nowPlaying.info.title);
+                message.channel.send("🎵 ***Now Playing:*** " + client.nowPlaying.info.title);
             });
             // EVENT: When a bot leaves the voice chat, all instances regarding the music will become null
             client.musicplayer.on('nodeDisconnect', (event) => {
