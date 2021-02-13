@@ -15,7 +15,11 @@ module.exports = {
         else if(!message.member.voice.channel) return message.channel.send('Are you really not in a VC? lmao tf?');
 
         const node = client.shoukaku.getNode(); // Gets the Shoukaku Socket
-        let data = await node.rest.resolve(args.join(" "), 'youtube'); // Returns an array of possible queries
+        var data = null;
+
+        // If it is a URL, it will search it; Otherwise, search the keywords into Youtube
+        if(args.join(" ").includes("http")) data = await node.rest.resolve(args.join(" ")); 
+        else data = await node.rest.resolve(args.join(" "), "youtube");
         if (!data) return;
 
         // Initializes the music player
@@ -24,6 +28,7 @@ module.exports = {
                 guildID: message.guild.id,
                 voiceChannelID: message.member.voice.channelID
             }); 
+            client.musicplayer.setVolume(50);
             // EVENT: When an error is thrown
             client.musicplayer.on('error', (error) => {
                 console.error(error);
@@ -42,7 +47,7 @@ module.exports = {
                 // Assuming there is a next song in the queue
                 console.log('Next song is: ' + client.nowPlaying.info.title);
                 client.musicplayer.playTrack(client.nowPlaying);
-                message.channel.send("🎵 Now Playing: " + client.nowPlaying.info.title);
+                message.channel.send("🎵 ***Now Playing:*** " + client.nowPlaying.info.title);
             });
             // EVENT: When a bot leaves the voice chat, all instances regarding the music will become null
             client.musicplayer.on('nodeDisconnect', (event) => {
