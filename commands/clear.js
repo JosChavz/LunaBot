@@ -12,8 +12,6 @@ module.exports = {
         if(!client.nowPlaying) return message.channel.send('Bro... nothing is even playing lmao');
 
         client.songQueue = [];
-
-        await client.musicplayer.stopTrack();
-        message.channel.send(`Stopped.`);
+        return message.channel.send("Queue cleared! 💥");
     }
 }

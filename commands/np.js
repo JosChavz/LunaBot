@@ -12,6 +12,6 @@ module.exports = {
         if(!client.nowPlaying) return message.channel.send('Nothing is currently playing!');
 
         const np = client.nowPlaying.info;
-        message.channel.send(`${np.title} by ${np.author}`);
+        message.channel.send(`***Currently playing:*** 🎶 \`${np.title} by ${np.author}\` 🎶`);
     }
 }
