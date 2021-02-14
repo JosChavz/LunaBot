@@ -10,6 +10,11 @@ module.exports = {
     run: async(client, message, args) => {
         if(!message.member.voice.channel) return message.channel.send('Are you really not in a VC? lmao tf?');
         if(!client.nowPlaying) return message.channel.send('Bro... nothing is even playing lmao');
+
+        // Sets the index to skip in songQueue
+        index = parseInt(args[0]);
+        if(index != NaN && (1 <= index <= client.songQueue.length)) client.skipTo = index - 1; 
+        if(index != NaN && (1 > index || index > client.songQueue.length)) return await message.channel.send("😵 No such index!");
         
         message.channel.send('⏩ Skipped!');
         await client.musicplayer.stopTrack();

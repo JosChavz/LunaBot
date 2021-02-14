@@ -13,9 +13,19 @@ module.exports = {
 
         if(client.songQueue.length == 0) return message.channel.send("🙈 Nothing here!");
         else {
-            message.channel.send(`${client.songQueue.slice(0, 10).map( (song, i) => {
-                return `${i+1} - ${song.info.title} by ${song.info.author}`
-            } ).join('\n')}${client.songQueue.length > 10 ? `\nAnd ${client.songQueue.length - 10} songs more...` : ''}`);
+            list = `${client.songQueue.slice(0, 10).map( (song, i) => {
+                return `**${i+1}** - ${song.info.title} by ${song.info.author}`
+            } ).join('\n')}${client.songQueue.length > 10 ? `\nAnd ${client.songQueue.length - 10} songs more...` : ''}`;
+            console.log(list);
+            message.channel.send(
+                client.embed(
+                    {
+                        title: 'Queue:',
+                        description: list
+                    },
+                    message
+                )
+            );
         } 
     }
 }
