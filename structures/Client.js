@@ -31,6 +31,7 @@ class MusicClient extends Client {
         this.musicplayer = null;
         this.nowPlaying = null;
         this.songQueue = [];
+        this.skipTo = null;
     }
 
     /**
