@@ -37,6 +37,13 @@ module.exports = {
             // EVENT: Song that has finished will pop from the current queue
             client.musicplayer.on('end', (event) => {
                 console.log('Song has ended! Finished song: ' + client.nowPlaying.info.title);
+                console.log(typeof client.skipTo);
+                // User requested to skip to a specific index in queue
+                if(Number.isFinite(client.skipTo)) {
+                    if(client.skipTo != 0) client.songQueue = client.songQueue.slice(parseInt(client.skipTo));
+                    client.skipTo = null;
+                }
+
                 client.nowPlaying = client.songQueue.shift();
 
                 if(!client.nowPlaying) {
@@ -65,6 +72,9 @@ module.exports = {
         data = data.tracks.shift();
         
         client.songQueue.push(data);
+
+        // Deletes the message to the song request from user
+        message.delete();
 
         // In case musicplayer is not playing anything at the moment
         if(client.musicplayer.track == null || client.musicplayer.track == "") {
