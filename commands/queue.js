@@ -16,7 +16,7 @@ module.exports = {
             list = `${client.songQueue.slice(0, 10).map( (song, i) => {
                 return `**${i+1}** - ${song.info.title} by ${song.info.author}`
             } ).join('\n')}${client.songQueue.length > 10 ? `\nAnd ${client.songQueue.length - 10} songs more...` : ''}`;
-            console.log(list);
+
             message.channel.send(
                 client.embed(
                     {

@@ -6,6 +6,21 @@ const musicbot = new MusicClient();
 
 musicbot.start(TOKEN, './commands');
 
+/* const url = "https://api.spotify.com/v1/tracks/320twJYO0LC64eWCuCC5vj";
+songUrl = "320twJYO0LC64eWCuCC5vj";
+
+const options = {
+    headers: {
+        "Authorization": `Bearer ${SPOTIFY_TOKEN}`,
+        'Accept': "application/json",
+        'Content-Type': "application/json"
+    }
+};
+
+fetch(url, options)
+    .then(res => res.json() )
+    .then(data => console.log(data)); */
+
 //const MusicClient = require('./structures/Client');
 //const musicbot = new MusicClient();
 //musicbot.start(TOKEN, './commands');
