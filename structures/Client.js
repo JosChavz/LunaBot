@@ -1,7 +1,7 @@
 const { clear } = require('console');
 const { Collection, Client, MessageEmbed, Message } = require('discord.js');
 const { Shoukaku, ShoukakuPlayer } = require('shoukaku');
-const { APPLICATION_CONFIG } = require('../bot_token'); 
+const { APPLICATION_CONFIG, COMMAND } = require('../bot_token'); 
 const Database = require('./Database');
 
 const LavalinkServer = [{ 
@@ -63,7 +63,7 @@ class MusicClient extends Client {
         this.on('ready', ()=> {
             console.log(`I'm now online!`);
         });
-        this.prefix = '&';
+        this.prefix = COMMAND;
         this.on('message', async(message) => {
             if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
 

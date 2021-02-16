@@ -1,4 +1,6 @@
 const { Message } = require('discord.js');
+const { SPOTIFY_TOKEN } = require("../bot_token");
+const fetch = require("node-fetch");
 
 module.exports = {
     name: 'play',
@@ -16,10 +18,42 @@ module.exports = {
 
         const node = client.shoukaku.getNode(); // Gets the Shoukaku Socket
         var data = null;
+        var isSpotify = false;
 
-        // If it is a URL, it will search it; Otherwise, search the keywords into Youtube
-        if(args.join(" ").includes("http")) data = await node.rest.resolve(args.join(" ")); 
-        else data = await node.rest.resolve(args.join(" "), "youtube");
+        // HANDLES SPOTIFY URLS REQUESTS
+        if(args[0].includes("open.spotify.com/")) {
+            isSpotify = true;
+            const songID = args[0].substring( args[0].indexOf("/track/") + 7, args[0].indexOf("?si"));
+            const url = "https://api.spotify.com/v1/tracks/" + songID;
+            var jsonObj = null;
+
+            const options = {
+                headers: {
+                    "Authorization": `Bearer ${SPOTIFY_TOKEN}`,
+                    'Accept': "application/json",
+                    'Content-Type': "application/json"
+                }
+            };
+
+            // Retrieves a JSON object from the given Spotify URL
+            await fetch(url, options)
+                .then(res => res.json() )
+                .then(data => jsonObj = data);
+                //.then(()=> console.log(jsonObj));
+
+            args = jsonObj.name + " " + jsonObj.artists[0].name
+        }
+        
+        if(isSpotify) {
+            data = await node.rest.resolve(args, "youtube");
+        }
+        else {
+            // If it is a URL, it will search it; Otherwise, search the keywords into Youtube
+            if(args.join(" ").includes("http")) data = await node.rest.resolve(args.join(" ")); 
+            else data = await node.rest.resolve(args.join(" "), "youtube");
+        }
+
+        // If nothing was found, meaning there was an error.
         if (!data) return;
 
         // Initializes the music player
