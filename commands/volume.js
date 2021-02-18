@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: 'volume',
+    description: "`[0-100]` Raise/Lower the music! *Current volume is always 50",
     /**
      * @param {Client} music
      * @param {Message} message

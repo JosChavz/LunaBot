@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: 'pause',
+    description: "To pause current music",
     /**
      * @param {Client} client
      * @param {Message} message

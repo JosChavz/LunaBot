@@ -10,12 +10,12 @@ Command | Description
 &play [URL|Keyword] | Will play a song when given a URL from YouTube; Can search up on YouTube if link is not provided. 
 &podcast [Artist] | Will give options to play your favorite podcast. Still in the works! 
 &volume [0-100] | Raise/Lower the music! *Current volume is always 50
-&pause | To pause
+&pause | To pause current music
 &resume | Resumes music
 &np | Shows what is currently playing
 &queue | Prints out the current queue 
 &skip [0-10] | Skips the current song; If given an integer, skips to that index in queue
-&disconnect | Disconnects from voice chat
+&disconnect | Disconnects the bot from voice chat
 &clear | Clears the queue
 
 #### Resources I used

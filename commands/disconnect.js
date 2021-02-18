@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: `disconnect`,
+    description: "Disconnects the bot from voice chat",
     /**
      * @param {Client} client
      * @param {Message} message

@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: 'queue',
+    description: 'Prints out the current queue for music & podcast.',
     /**
      * @param {Client} client
      * @param {Message} message

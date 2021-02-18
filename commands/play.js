@@ -4,9 +4,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
     name: 'play',
-    timeOut: () => {
-        console.log('Is in timeout...');
-    },
+    description: "`URL|Keyword` Plays a song from Spotify, YouTube, Twitch, or any MP3 links. Must be in a Voice Chat prior call.",
     /**
      * @param {Client} client
      * @param {Message} message

@@ -24,7 +24,6 @@
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "podcast-index-api": "^1.1.8",
-    "sequelize": "^6.3.5",
     "shoukaku": "^1.5.2",
     "sqlite3": "^5.0.0"
   },

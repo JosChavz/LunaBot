@@ -60,10 +60,15 @@ class MusicClient extends Client {
     async start(token, path) {
         this.commandHandler(path);
         this.login(token);
+
+        this.prefix = COMMAND;
+
+        // ON READY BOT EVENT
         this.on('ready', ()=> {
             console.log(`I'm now online!`);
+            this.user.setActivity('~help', {type: "WATCHING"});
         });
-        this.prefix = COMMAND;
+        // ON MESSAGE BOT EVENT
         this.on('message', async(message) => {
             if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
 
