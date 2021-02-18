@@ -3,3 +3,5 @@ server/application.yml
 server/logs
 .env
 server/older-version
+stopServer.sh
+bootServer.sh
