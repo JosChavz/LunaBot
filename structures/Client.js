@@ -28,6 +28,7 @@ class MusicClient extends Client {
         this.path = require('path');
         this.fs = require('fs'); // File System
         this.shoukaku = new Shoukaku(this, LavalinkServer, ShoukakuOptions);
+	this.shoukaku.on('error', console.error);
         this.musicplayer = null;
         this.nowPlaying = null;
         this.songQueue = [];
@@ -68,7 +69,15 @@ class MusicClient extends Client {
             console.log(`I'm now online!`);
             this.user.setActivity('~help', {type: "WATCHING"});
         });
+<<<<<<< HEAD
         // ON MESSAGE BOT EVENT
+=======
+<<<<<<< HEAD
+        this.prefix = '~';
+=======
+        this.prefix = COMMAND;
+>>>>>>> 69cad082f7991f87b0be1eec99daab6db7387567
+>>>>>>> 8a0558834f7afdfd228f6e15f1f2ded811eeb0c6
         this.on('message', async(message) => {
             if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
 

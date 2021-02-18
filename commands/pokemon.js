@@ -13,7 +13,8 @@ module.exports = {
         switch(args[0]) {
             case 'pokedex':
                 const msg = await message.channel.send('🔃 Gathering data...');
-                const avalNames = await client.runQuery(`SELECT name FROM aval_poke`);
+                let avalNames = await client.runQuery(`SELECT name FROM aval_poke`);
+		console.log(avalNames);
                 await msg.edit(`**Available Pokemon**\n${avalNames.slice(0, 10).map( (pokemon, i) => {
                     return `${i+1}. ${pokemon.name}`;
                 }).join('\n')}`);
