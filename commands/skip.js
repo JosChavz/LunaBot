@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: `skip`,
+    description: "`[0-10]` Skips the current song; If given an integer, skips to that index in queue",
     /**
      * @param {Client} client
      * @param {Message} message

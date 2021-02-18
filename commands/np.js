@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: 'np',
+    description: "Shows what is currently playing",
     /**
      * @param {Client} client
      * @param {Message} message

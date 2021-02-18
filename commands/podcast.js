@@ -6,6 +6,7 @@ const api = require('podcast-index-api')("RWFKUK2Q8HNQYHLQBDYW", "bEeNh798BwSyZ8
 
 module.exports = {
     name: `podcast`,
+    description: "`[Artist]` Will give options to play your favorite podcast. Options will be prompted",
     /**
      * @param {Client} client
      * @param {Message} message

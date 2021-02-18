@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: `clear`,
+    description: "Clears the queue",
     /**
      * @param {ShoukakuPlayer} musicplayer
      * @param {Message} message

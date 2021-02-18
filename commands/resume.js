@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: 'resume',
+    description: "Resumes music if paused",
     /**
      * @param {Client} client
      * @param {Message} message

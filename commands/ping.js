@@ -2,6 +2,7 @@ const { Message } = require('discord.js');
 
 module.exports = {
     name: `ping`,
+    description: "A ping of myself? I don't know... 😋",
     /**
      * @param {Client} client
      * @param {Message} message
