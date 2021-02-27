@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+<<<<<<< HEAD
 var bot_token = require('./bot_token');
 const MusicClient = require('./structures/Client.js');
 const musicbot = new MusicClient();
@@ -28,3 +29,10 @@ const fetch = require("node-fetch");
 
     musicbot.start(bot_token.TOKEN, './commands');
 })();
+=======
+const { TOKEN } = require('./bot_token');
+const MusicClient = require('./structures/Client.js');
+const musicbot = new MusicClient();
+
+musicbot.start(TOKEN, './commands');
+>>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66

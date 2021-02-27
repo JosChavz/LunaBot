@@ -4,5 +4,9 @@ server/logs
 .env
 server/older-version
 stopServer.sh
+<<<<<<< HEAD
 bootServer.sh
 node_modules
+=======
+bootServer.sh
+>>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66

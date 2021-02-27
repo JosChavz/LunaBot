@@ -20,9 +20,12 @@ module.exports = {
 
         // HANDLES SPOTIFY URLS REQUESTS
         if(args[0].includes("open.spotify.com/")) {
+<<<<<<< HEAD
             if(args[0].includes("/episode/")) 
                 return await message.reply("😞💔 Sorry, I can't play Spotify Podcast. Try using the `podcast` command! 😊");
 
+=======
+>>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66
             isSpotify = true;
             const songID = args[0].substring( args[0].indexOf("/track/") + 7, args[0].indexOf("?si"));
             const url = "https://api.spotify.com/v1/tracks/" + songID;
@@ -39,8 +42,13 @@ module.exports = {
             // Retrieves a JSON object from the given Spotify URL
             await fetch(url, options)
                 .then(res => res.json() )
+<<<<<<< HEAD
                 .then(data => jsonObj = data)
                 .then(()=> console.log(jsonObj));
+=======
+                .then(data => jsonObj = data);
+                //.then(()=> console.log(jsonObj));
+>>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66
 
             args = jsonObj.name + " " + jsonObj.artists[0].name
         }

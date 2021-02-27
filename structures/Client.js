@@ -2,7 +2,10 @@ const { clear } = require('console');
 const { Collection, Client, MessageEmbed, Message } = require('discord.js');
 const { Shoukaku, ShoukakuPlayer } = require('shoukaku');
 const { APPLICATION_CONFIG, COMMAND } = require('../bot_token'); 
+<<<<<<< HEAD
 const bot_token = require("../bot_token");
+=======
+>>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66
 const Database = require('./Database');
 
 const LavalinkServer = [{ 
@@ -70,10 +73,22 @@ class MusicClient extends Client {
             console.log(`I'm now online!`);
             this.user.setActivity('~help', {type: "WATCHING"});
         });
+<<<<<<< HEAD
 
         // ON MESSAGE BOT EVENT
         this.prefix = '~';
         this.prefix = COMMAND;
+=======
+<<<<<<< HEAD
+        // ON MESSAGE BOT EVENT
+=======
+<<<<<<< HEAD
+        this.prefix = '~';
+=======
+        this.prefix = COMMAND;
+>>>>>>> 69cad082f7991f87b0be1eec99daab6db7387567
+>>>>>>> 8a0558834f7afdfd228f6e15f1f2ded811eeb0c6
+>>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66
         this.on('message', async(message) => {
             if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
 
