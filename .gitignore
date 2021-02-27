@@ -5,3 +5,4 @@ server/logs
 server/older-version
 stopServer.sh
 bootServer.sh
+node_modules
