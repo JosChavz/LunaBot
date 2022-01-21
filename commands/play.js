@@ -60,11 +60,15 @@ module.exports = {
 
         // Initializes the music player
         if (!client.musicplayer) {
-            client.musicplayer = await node.joinVoiceChannel({
-                guildID: message.guild.id,
-                voiceChannelID: message.member.voice.channelID
-            }); 
-            client.musicplayer.setVolume(50);
+			let channel_options = {
+				guildId: message.guild.id,
+				channelId: message.member.voice.channelId,
+				shardId: message.guild.shardId
+			};
+
+            client.musicplayer = await node.joinChannel(channel_options); 
+
+            //client.musicplayer.setVolume(50);
             // EVENT: When an error is thrown
             client.musicplayer.on('error', (error) => {
                 console.error(error);

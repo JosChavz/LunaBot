@@ -1,6 +1,6 @@
 {
   "name": "LunaBot-new",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Discord bot made for friends.",
   "main": "index.js",
   "repository": "git@github.com:JosChavz/LunaBot.git",
