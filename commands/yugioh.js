@@ -1,5 +1,5 @@
 const { Message } = require('discord.js');
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
 
 module.exports = {
     name: 'yugioh',

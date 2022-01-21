@@ -1,9 +1,8 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Intents } = require('discord.js');
 var bot_token = require('./bot_token');
 const MusicClient = require('./structures/Client.js');
 const musicbot = new MusicClient();
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
 
 (async ()=> {
     const url = "https://accounts.spotify.com/api/token";

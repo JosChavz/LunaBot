@@ -1,19 +1,19 @@
 const { clear } = require('console');
-const { Collection, Client, MessageEmbed, Message } = require('discord.js');
-const { Shoukaku, ShoukakuPlayer } = require('shoukaku');
+const { Collection, Client, MessageEmbed, Message, Intents } = require('discord.js');
+const { Shoukaku, ShoukakuPlayer, Libraries } = require('shoukaku');
 const { APPLICATION_CONFIG, COMMAND } = require('../bot_token'); 
-<<<<<<< HEAD
 const bot_token = require("../bot_token");
-=======
->>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66
 const Database = require('./Database');
+const allIntents = new Intents(32767);
 
 const LavalinkServer = [{ 
-    name: APPLICATION_CONFIG.name, 
-    host: APPLICATION_CONFIG.host, 
-    port: APPLICATION_CONFIG.port, 
-    auth: APPLICATION_CONFIG.auth 
+    "name": APPLICATION_CONFIG.name, 
+    "url": APPLICATION_CONFIG.url, 
+    "auth": APPLICATION_CONFIG.auth,
+	"secure": APPLICATION_CONFIG.secure
 }];
+
+console.log(LavalinkServer);
 
 const ShoukakuOptions = { 
     moveOnDisconnect: false, 
@@ -26,13 +26,13 @@ const ShoukakuOptions = {
 class MusicClient extends Client {
 
     constructor() {
-        super();
+        super({intents: allIntents});
         this.commands = new Collection();
         this.discord = require('discord.js');
         this.path = require('path');
         this.fs = require('fs'); // File System
-        this.shoukaku = new Shoukaku(this, LavalinkServer, ShoukakuOptions);
-	this.shoukaku.on('error', console.error);
+        this.shoukaku = new Shoukaku(new Libraries.DiscordJS(this), LavalinkServer, ShoukakuOptions);
+		this.shoukaku.on('error', console.error);
         this.musicplayer = null;
         this.nowPlaying = null;
         this.songQueue = [];
@@ -73,23 +73,12 @@ class MusicClient extends Client {
             console.log(`I'm now online!`);
             this.user.setActivity('~help', {type: "WATCHING"});
         });
-<<<<<<< HEAD
 
         // ON MESSAGE BOT EVENT
         this.prefix = '~';
         this.prefix = COMMAND;
-=======
-<<<<<<< HEAD
-        // ON MESSAGE BOT EVENT
-=======
-<<<<<<< HEAD
-        this.prefix = '~';
-=======
-        this.prefix = COMMAND;
->>>>>>> 69cad082f7991f87b0be1eec99daab6db7387567
->>>>>>> 8a0558834f7afdfd228f6e15f1f2ded811eeb0c6
->>>>>>> 4236616515c56a57412ccd0467ddd33028f65b66
-        this.on('message', async(message) => {
+
+        this.on('messageCreate', async(message) => {
             if(message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(this.prefix)) return;
 
             const [cmd, ...args] = message.content.slice(this.prefix.length).trim().split(/ +/g);

@@ -1,33 +1,21 @@
 {
-  "name": "LunaBot",
+  "name": "LunaBot-new",
   "version": "1.0.0",
-  "description": "Package for LunaBot",
+  "description": "A Discord bot made for friends.",
   "main": "index.js",
-  "scripts": {
-    "start": "sleep 5 && node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JosChavz/LunaBot.git"
-  },
-  "author": "Jose Chavez",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JosChavz/LunaBot/issues"
-  },
-  "homepage": "https://github.com/JosChavz/LunaBot#readme",
+  "repository": "git@github.com:JosChavz/LunaBot.git",
+  "author": "Jose Manuel Chavez",
+  "license": "MIT",
   "dependencies": {
-    "discord.js": "^12.4.0",
-    "dotenv": "^8.2.0",
-    "mariadb": "^2.5.1",
+    "@discordjs/voice": "^0.7.5",
+    "cross-fetch": "^3.1.5",
+    "discord.js": "^13.6.0",
+    "dotenv": "^14.2.0",
+    "mariadb": "^2.5.5",
     "mysql": "^2.18.1",
-    "node-fetch": "^2.6.1",
-    "podcast-index-api": "^1.1.8",
-    "shoukaku": "^1.5.2",
-    "sqlite3": "^5.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
+    "node-fetch": "^3.2.0",
+    "pm2": "^5.1.2",
+    "podcast-index-api": "^1.1.9",
+    "shoukaku": "^2.1.4"
   }
 }

@@ -1,6 +1,7 @@
 const { Message } = require('discord.js');
 const { SPOTIFY_TOKEN } = require("../bot_token");
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
+const { joinVoiceChannel } = require('@discordjs/voice');
 
 module.exports = {
     name: 'play',
